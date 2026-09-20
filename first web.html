@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Velvet - Elegance Redefined | Luxury Sri Lankan Fashion</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind Config for Custom Colors & Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf8f6',
+                            100: '#f2e8e5',
+                            200: '#e5d0cb',
+                            300: '#d5b2aa',
+                            400: '#c28e83',
+                            500: '#aa6d61',
+                            600: '#945449',
+                            700: '#7a4239',
+                            800: '#643730',
+                            900: '#53302a',
+                        },
+                        velvet: '#2a1a1f',
+                        gold: '#d4af37'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Alpine.js Library -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        [x-cloak] { display: none !important; }
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .glassmorphism-dark {
+            background: rgba(42, 26, 31, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d5b2aa;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-brand-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen selection:bg-brand-200 selection:text-brand-900" 
+      x-data="appData()" 
+      x-init="initApp()">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-velvet text-white text-xs py-2 px-4 text-center tracking-wider flex justify-between items-center px-6 md:px-12">
+        <span class="hidden sm:inline-block"><i class="fa-solid fa-truck-fast mr-2 text-gold"></i> Islandwide Delivery Available | Island Delivery LKR 350</span>
+        <span class="mx-auto sm:mx-0 font-medium">Use Code <span class="text-gold font-bold">AURA10</span> for 10% OFF your first order!</span>
+        <span class="hidden md:inline-block"><i class="fa-solid fa-headset mr-2 text-gold"></i> Support: 07xxxxxxxx</span>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 glassmorphism shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Mobile Menu & Search Button -->
+                <div class="flex items-center space-x-2 md:hidden">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 text-gray-700 hover:text-brand-600 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                    <button @click="searchOpen = !searchOpen" class="p-2 text-gray-700 hover:text-brand-600 focus:outline-none">
+                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                    </button>
+                </div>
+
+                <!-- Brand Logo -->
+                <div class="flex-1 md:flex-none text-center md:text-left">
+                    <a href="#" class="inline-block">
+                        <h1 class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-velvet">
+                            AURA <span class="text-brand-500 font-normal italic">VELVET</span>
+                        </h1>
+                        <p class="text-[9px] uppercase tracking-[0.3em] text-brand-600 -mt-1 font-semibold">Boutique Ceylon</p>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wide">
+                    <a href="#hero" class="text-gray-800 hover:text-brand-600 transition-colors py-2">Home</a>
+                    <a href="#shop" class="text-gray-800 hover:text-brand-600 transition-colors py-2">Collection</a>
+                    <a href="#about" class="text-gray-800 hover:text-brand-600 transition-colors py-2">Our Story</a>
+                    <a href="#contact" class="text-gray-800 hover:text-brand-600 transition-colors py-2">Contact Us</a>
+                </nav>
+
+                <!-- Search, Wishlist & Cart Icons -->
+                <div class="flex items-center space-x-4 sm:space-x-6">
+                    <!-- Search Bar (Desktop Toggle) -->
+                    <div class="relative hidden md:block">
+                        <input type="text" x-model="searchQuery" placeholder="Search elegance..." 
+                               class="w-48 lg:w-64 pl-9 pr-4 py-1.5 text-xs rounded-full bg-white border border-brand-200 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-all">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-xs"></i>
+                    </div>
+
+                    <!-- Wishlist Button -->
+                    <button @click="wishlistDrawerOpen = true" class="relative p-2 text-gray-700 hover:text-brand-600 transition-colors">
+                        <i class="fa-regular fa-heart text-xl"></i>
+                        <span x-show="wishlist.length > 0" x-text="wishlist.length" x-cloak
+                              class="absolute top-0 right-0 bg-brand-500 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center"></span>
+                    </button>
+
+                    <!-- Cart Button -->
+                    <button @click="cartDrawerOpen = true" class="relative p-2 text-gray-700 hover:text-brand-600 transition-colors">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span x-show="cartCount > 0" x-text="cartCount" x-cloak
+                              class="absolute top-0 right-0 bg-velvet text-gold text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Search Dropdown -->
+        <div x-show="searchOpen" x-cloak x-transition class="md:hidden px-4 pb-4 bg-white/95 border-t border-brand-100">
+            <div class="relative mt-2">
+                <input type="text" x-model="searchQuery" placeholder="Search dresses, sarees, tops..." 
+                       class="w-full pl-10 pr-4 py-2 text-sm rounded-lg bg-brand-50 border border-brand-200 focus:outline-none focus:border-brand-500">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div x-show="mobileMenuOpen" x-cloak x-transition class="md:hidden glassmorphism border-t border-brand-200">
+            <div class="px-4 pt-2 pb-6 space-y-3 font-medium text-base">
+                <a @click="mobileMenuOpen = false" href="#hero" class="block px-3 py-2 rounded-md hover:bg-brand-100">Home</a>
+                <a @click="mobileMenuOpen = false" href="#shop" class="block px-3 py-2 rounded-md hover:bg-brand-100">Collection</a>
+                <a @click="mobileMenuOpen = false" href="#about" class="block px-3 py-2 rounded-md hover:bg-brand-100">Our Story</a>
+                <a @click="mobileMenuOpen = false" href="#contact" class="block px-3 py-2 rounded-md hover:bg-brand-100">Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Slider Section -->
+    <section id="hero" class="relative bg-velvet overflow-hidden text-white min-h-[500px] lg:min-h-[600px] flex items-center">
+        <!-- Slider Images Container -->
+        <template x-for="(slide, index) in slides" :key="index">
+            <div x-show="currentSlide === index" 
+                 x-transition:enter="transition ease-out duration-700"
+                 x-transition:enter-start="opacity-0 scale-105"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-500"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95"
+                 class="absolute inset-0 z-0">
+                <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover opacity-45">
+                <div class="absolute inset-0 bg-gradient-to-r from-velvet/90 via-velvet/50 to-transparent"></div>
+            </div>
+        </template>
+
+        <!-- Slide Content -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20">
+            <div class="max-w-xl">
+                <p x-text="slides[currentSlide].subtitle" class="text-gold uppercase tracking-[0.25em] text-xs font-semibold mb-3"></p>
+                <h2 x-text="slides[currentSlide].title" class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"></h2>
+                <p x-text="slides[currentSlide].description" class="text-brand-100 text-sm sm:text-base font-light mb-8 leading-relaxed"></p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#shop" class="bg-brand-500 hover:bg-brand-600 text-white px-8 py-3.5 rounded-full font-medium text-sm transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                        Shop Collection
+                    </a>
+                    <a href="#about" class="border border-white/40 hover:bg-white/10 text-white px-8 py-3.5 rounded-full font-medium text-sm transition-all">
+                        Explore Story
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Controls -->
+        <button @click="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-white/30 backdrop-blur-md flex items-center justify-center text-white transition">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button @click="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-white/10 hover:bg-white/30 backdrop-blur-md flex items-center justify-center text-white transition">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- Slide Dots -->
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-2">
+            <template x-for="(slide, index) in slides" :key="index">
+                <button @click="currentSlide = index" 
+                        :class="currentSlide === index ? 'w-8 bg-gold' : 'w-2 bg-white/50'" 
+                        class="h-2 rounded-full transition-all duration-300"></button>
+            </template>
+        </div>
+    </section>
+
+    <!-- Main Collection Section -->
+    <main id="shop" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow">
+        
+        <!-- Section Title -->
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-brand-500 font-medium text-xs tracking-widest uppercase">Timeless Couture</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-velvet mt-1">Our Signature Collections</h2>
+            <div class="w-16 h-0.5 bg-brand-400 mx-auto mt-4"></div>
+        </div>
+
+        <!-- Category Filter Buttons -->
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10">
+            <template x-for="cat in categories" :key="cat">
+                <button @click="selectedCategory = cat" 
+                        :class="selectedCategory === cat ? 'bg-velvet text-gold shadow-md' : 'bg-white text-gray-700 hover:bg-brand-100 border border-brand-200'"
+                        class="px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200">
+                    <span x-text="cat"></span>
+                </button>
+            </template>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            <template x-for="product in filteredProducts" :key="product.id">
+                <div class="bg-white rounded-2xl overflow-hidden border border-brand-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
+                    <!-- Product Image Container -->
+                    <div class="relative overflow-hidden aspect-[3/4] bg-brand-50">
+                        <img :src="product.image" :alt="product.name" 
+                             class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        
+                        <!-- Badges -->
+                        <div class="absolute top-3 left-3 flex flex-col gap-1">
+                            <span x-show="product.isNew" class="bg-velvet text-white text-[10px] font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">New</span>
+                            <span x-show="product.discount" x-text="'-' + product.discount + '%'" class="bg-brand-500 text-white text-[10px] font-semibold px-2.5 py-1 rounded-full"></span>
+                        </div>
+
+                        <!-- Quick Wishlist Button -->
+                        <button @click="toggleWishlist(product)" 
+                                class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/80 hover:bg-white text-gray-700 flex items-center justify-center transition shadow-sm hover:scale-110">
+                            <i :class="isInWishlist(product.id) ? 'fa-solid fa-heart text-red-500' : 'fa-regular fa-heart'"></i>
+                        </button>
+
+                        <!-- Quick View Overlay -->
+                        <div class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex justify-center">
+                            <button @click="openQuickView(product)" 
+                                    class="bg-white text-velvet font-medium text-xs py-2 px-4 rounded-full shadow hover:bg-brand-50 transition transform translate-y-2 group-hover:translate-y-0">
+                                <i class="fa-regular fa-eye mr-1.5"></i> Quick View
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Product Details -->
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span x-text="product.category" class="text-[11px] font-semibold text-brand-500 uppercase tracking-wider"></span>
+                            <h3 x-text="product.name" class="font-serif font-semibold text-gray-900 text-base mt-1 line-clamp-1 group-hover:text-brand-600 transition-colors"></h3>
+                            <p x-text="product.description" class="text-xs text-gray-500 mt-1 line-clamp-2 font-light"></p>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-brand-50 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-gray-400">LKR</span>
+                                <span x-text="product.price.toLocaleString()" class="font-bold text-gray-900 text-lg"></span>
+                            </div>
+                            <button @click="addToCart(product, 'M')" 
+                                    class="bg-brand-100 hover:bg-brand-500 hover:text-white text-brand-800 p-2.5 rounded-full transition-colors flex items-center justify-center">
+                                <i class="fa-solid fa-plus text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <!-- Empty Search State -->
+        <div x-show="filteredProducts.length === 0" class="text-center py-16">
+            <i class="fa-solid fa-shirt text-4xl text-brand-300 mb-3"></i>
+            <h3 class="text-lg font-medium text-gray-700">No products found</h3>
+            <p class="text-sm text-gray-500 mt-1">Try resetting your search or category filters.</p>
+            <button @click="selectedCategory = 'All'; searchQuery = ''" class="mt-4 bg-brand-500 text-white text-xs px-5 py-2 rounded-full font-medium">Reset Filters</button>
+        </div>
+    </main>
+
+    <!-- Brand Story / About Section -->
+    <section id="about" class="bg-brand-100/50 py-16 border-y border-brand-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80" alt="Aura Velvet Craftsmanship" class="rounded-3xl shadow-xl w-full h-[400px] object-cover">
+                    <div class="absolute -bottom-6 -right-6 bg-velvet text-gold p-6 rounded-2xl shadow-lg hidden sm:block max-w-[200px]">
+                        <p class="font-serif text-3xl font-bold">100%</p>
+                        <p class="text-xs tracking-wider uppercase text-brand-200 mt-1">Authentic Sri Lankan Design</p>
+                    </div>
+                </div>
+                <div>
+                    <span class="text-brand-600 font-semibold text-xs tracking-widest uppercase">Our Heritage</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-velvet mt-2 mb-6">Embracing Ceylon Elegance with Modern Fashion</h2>
+                    <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
+                        Aura Velvet was born out of a desire to create handcrafted luxury wear that reflects the graceful charm of Sri Lanka. From intricate handloom silks to flowy chiffon dresses, each creation is tailored for modern royalty.
+                    </p>
+                    <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-6">
+                        We blend contemporary runway trends with rich traditional craftsmanship, offering unique pieces designed to make every woman feel radiant, confident, and unforgettable.
+                    </p>
+                    <div class="grid grid-cols-3 gap-4 border-t border-brand-200 pt-6">
+                        <div>
+                            <p class="font-serif font-bold text-xl text-velvet">5,000+</p>
+                            <p class="text-xs text-gray-500">Happy Clients</p>
+                        </div>
+                        <div>
+                            <p class="font-serif font-bold text-xl text-velvet">100%</p>
+                            <p class="text-xs text-gray-500">Premium Fabrics</p>
+                        </div>
+                        <div>
+                            <p class="font-serif font-bold text-xl text-velvet">Islandwide</p>
+                            <p class="text-xs text-gray-500">Fast Shipping</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer Section -->
+    <footer id="contact" class="bg-velvet text-white pt-16 pb-8 border-t border-brand-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-white/10">
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <h3 class="font-serif text-2xl font-bold tracking-tight">
+                        AURA <span class="text-brand-400 italic font-normal">VELVET</span>
+                    </h3>
+                    <p class="text-xs text-brand-200 leading-relaxed font-light">
+                        Luxury fashion boutique based in Colombo, Sri Lanka. Crafted for elegance, designed for you.
+                    </p>
+                    <div class="flex space-x-3 pt-2">
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-500 flex items-center justify-center text-xs transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-500 flex items-center justify-center text-xs transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-white/10 hover:bg-brand-500 flex items-center justify-center text-xs transition"><i class="fa-brands fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-serif text-sm font-semibold tracking-wider text-gold uppercase mb-4">Quick Navigation</h4>
+                    <ul class="space-y-2 text-xs text-brand-200">
+                        <li><a href="#hero" class="hover:text-white transition">Home</a></li>
+                        <li><a href="#shop" class="hover:text-white transition">Dresses Collection</a></li>
+                        <li><a href="#shop" class="hover:text-white transition">Silk & Handloom Sarees</a></li>
+                        <li><a href="#about" class="hover:text-white transition">About Our Brand</a></li>
+                        <li><a href="#contact" class="hover:text-white transition">Customer Support</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Care -->
+                <div>
+                    <h4 class="font-serif text-sm font-semibold tracking-wider text-gold uppercase mb-4">Customer Care</h4>
+                    <ul class="space-y-2 text-xs text-brand-200">
+                        <li><a href="#" class="hover:text-white transition">Size Guide</a></li>
+                        <li><a href="#" class="hover:text-white transition">Shipping & Delivery Info</a></li>
+                        <li><a href="#" class="hover:text-white transition">Return & Exchange Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms & Conditions</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Boutique Contact -->
+                <div>
+                    <h4 class="font-serif text-sm font-semibold tracking-wider text-gold uppercase mb-4">Boutique Store</h4>
+                    <ul class="space-y-3 text-xs text-brand-200">
+                        <li class="flex items-start space-x-3">
+                            <i class="fa-solid fa-location-dot mt-0.5 text-gold"></i>
+                            <span>No. 42, Galle Road, Colombo 03, Sri Lanka</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-phone text-gold"></i>
+                            <span>07xxxxxxxx</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-envelope text-gold"></i>
+                            <span>support@auravelvet.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="mt-8 pt-4 flex flex-col sm:flex-row justify-between items-center text-[11px] text-brand-300">
+                <p>&copy; 2026 Aura Velvet Ceylon. All Rights Reserved.</p>
+                <p class="mt-2 sm:mt-0 flex items-center space-x-3">
+                    <span><i class="fa-solid fa-shield-halved text-gold mr-1"></i> Secure Demo Checkout</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Quick View Modal -->
+    <div x-show="quickViewModalOpen" x-cloak 
+         class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 sm:p-6"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0">
+        
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" @click="quickViewModalOpen = false"></div>
+
+        <!-- Modal Card -->
+        <div x-show="quickViewProduct" class="relative bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl z-10 grid grid-cols-1 md:grid-cols-2">
+            <!-- Close Button -->
+            <button @click="quickViewModalOpen = false" class="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-black/10 hover:bg-black/20 flex items-center justify-center text-gray-700 transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Image Side -->
+            <div class="h-64 md:h-full bg-brand-50 relative">
+                <img :src="quickViewProduct?.image" :alt="quickViewProduct?.name" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Details Side -->
+            <div class="p-6 sm:p-8 flex flex-col justify-between">
+                <div>
+                    <span x-text="quickViewProduct?.category" class="text-xs font-bold text-brand-500 uppercase tracking-wider"></span>
+                    <h3 x-text="quickViewProduct?.name" class="font-serif text-2xl font-bold text-gray-900 mt-1"></h3>
+                    <p class="text-xl font-bold text-brand-600 mt-2">LKR <span x-text="quickViewProduct?.price.toLocaleString()"></span></p>
+                    <p x-text="quickViewProduct?.description" class="text-xs text-gray-600 mt-4 leading-relaxed"></p>
+
+                    <!-- Size Selection -->
+                    <div class="mt-6">
+                        <label class="block text-xs font-semibold uppercase text-gray-700 mb-2">Select Size</label>
+                        <div class="flex space-x-3">
+                            <template x-for="size in ['S', 'M', 'L', 'XL']" :key="size">
+                                <button @click="selectedSize = size" 
+                                        :class="selectedSize === size ? 'bg-velvet text-white border-velvet' : 'bg-white text-gray-700 border-gray-300 hover:border-brand-400'"
+                                        class="w-10 h-10 rounded-xl border text-xs font-semibold flex items-center justify-center transition">
+                                    <span x-text="size"></span>
+                                </button>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="mt-8 space-y-3">
+                    <button @click="addToCart(quickViewProduct, selectedSize); quickViewModalOpen = false" 
+                            class="w-full bg-brand-500 hover:bg-brand-600 text-white py-3 rounded-xl font-medium text-sm transition shadow-md flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span>Add To Shopping Cart</span>
+                    </button>
+                    <button @click="quickBuy(quickViewProduct, selectedSize)" 
+                            class="w-full bg-velvet hover:bg-brand-900 text-gold py-3 rounded-xl font-semibold text-sm transition shadow-md">
+                        Buy Now (Express Checkout)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer (Sliding Overlay) -->
+    <div x-show="cartDrawerOpen" x-cloak class="fixed inset-0 z-50 overflow-hidden">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" @click="cartDrawerOpen = false"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <!-- Cart Header -->
+                <div class="p-6 bg-brand-50 border-b border-brand-200 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-bag-shopping text-brand-600"></i>
+                        <h2 class="font-serif font-bold text-lg text-velvet">Your Shopping Bag</h2>
+                        <span class="text-xs bg-brand-200 text-brand-900 px-2 py-0.5 rounded-full font-semibold" x-text="cartCount"></span>
+                    </div>
+                    <button @click="cartDrawerOpen = false" class="text-gray-400 hover:text-gray-600 text-xl">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+                    <template x-if="cart.length === 0">
+                        <div class="text-center py-12">
+                            <i class="fa-solid fa-basket-shopping text-4xl text-gray-300 mb-3"></i>
+                            <p class="text-gray-500 font-medium">Your shopping bag is empty.</p>
+                            <button @click="cartDrawerOpen = false" class="mt-4 bg-brand-500 text-white text-xs px-6 py-2.5 rounded-full font-medium">Explore Collection</button>
+                        </div>
+                    </template>
+
+                    <template x-for="(item, index) in cart" :key="index">
+                        <div class="flex items-center space-x-4 p-3 bg-brand-50/50 rounded-2xl border border-brand-100">
+                            <img :src="item.image" :alt="item.name" class="w-16 h-20 object-cover rounded-xl">
+                            <div class="flex-1">
+                                <h4 x-text="item.name" class="font-serif font-semibold text-sm text-gray-900"></h4>
+                                <p class="text-xs text-gray-500">Size: <span x-text="item.size" class="font-semibold text-gray-700"></span></p>
+                                <p class="text-xs font-bold text-brand-600 mt-1">LKR <span x-text="item.price.toLocaleString()"></span></p>
+                                
+                                <!-- Quantity Control -->
+                                <div class="flex items-center space-x-2 mt-2">
+                                    <button @click="updateQuantity(index, -1)" class="w-6 h-6 rounded-md bg-white border border-gray-300 text-xs flex items-center justify-center text-gray-600 hover:bg-gray-100">-</button>
+                                    <span x-text="item.quantity" class="text-xs font-semibold text-gray-800 w-4 text-center"></span>
+                                    <button @click="updateQuantity(index, 1)" class="w-6 h-6 rounded-md bg-white border border-gray-300 text-xs flex items-center justify-center text-gray-600 hover:bg-gray-100">+</button>
+                                </div>
+                            </div>
+                            <button @click="removeFromCart(index)" class="text-gray-400 hover:text-red-500 p-2">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Cart Footer & Checkout Action -->
+                <div x-show="cart.length > 0" class="p-6 bg-brand-50/80 border-t border-brand-200 space-y-3">
+                    <!-- Promo Code Input -->
+                    <div class="flex space-x-2">
+                        <input type="text" x-model="promoInput" placeholder="Promo code (AURA10)" 
+                               class="flex-1 px-3 py-2 text-xs rounded-lg border border-brand-200 focus:outline-none uppercase">
+                        <button @click="applyPromo()" class="bg-gray-800 text-white text-xs px-4 rounded-lg font-medium hover:bg-black transition">Apply</button>
+                    </div>
+
+                    <!-- Discount Applied Tag -->
+                    <div x-show="discount > 0" class="flex justify-between items-center text-xs text-green-700 font-semibold bg-green-50 p-2 rounded-lg">
+                        <span>Promo Discount Applied (10%)</span>
+                        <span>- LKR <span x-text="discountAmount.toLocaleString()"></span></span>
+                    </div>
+
+                    <!-- Totals Breakdown -->
+                    <div class="space-y-1.5 text-xs text-gray-600 border-t border-brand-200 pt-3">
+                        <div class="flex justify-between">
+                            <span>Subtotal</span>
+                            <span class="font-medium">LKR <span x-text="subtotal.toLocaleString()"></span></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Delivery Fee</span>
+                            <span class="font-medium">LKR <span x-text="deliveryFee.toLocaleString()"></span></span>
+                        </div>
+                        <div class="flex justify-between text-sm font-bold text-gray-900 pt-2 border-t border-brand-200">
+                            <span>Total Payable</span>
+                            <span class="text-brand-600">LKR <span x-text="grandTotal.toLocaleString()"></span></span>
+                        </div>
+                    </div>
+
+                    <button @click="cartDrawerOpen = false; checkoutModalOpen = true" 
+                            class="w-full bg-velvet hover:bg-brand-900 text-gold py-3.5 rounded-xl font-bold text-sm tracking-wide shadow-lg transition">
+                        Proceed To Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Drawer -->
+    <div x-show="wishlistDrawerOpen" x-cloak class="fixed inset-0 z-50 overflow-hidden">
+        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" @click="wishlistDrawerOpen = false"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <div class="p-6 bg-brand-50 border-b border-brand-200 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-heart text-red-500"></i>
+                        <h2 class="font-serif font-bold text-lg text-velvet">Saved Favorites</h2>
+                    </div>
+                    <button @click="wishlistDrawerOpen = false" class="text-gray-400 hover:text-gray-600 text-xl">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+                    <template x-if="wishlist.length === 0">
+                        <div class="text-center py-12">
+                            <i class="fa-regular fa-heart text-4xl text-gray-300 mb-3"></i>
+                            <p class="text-gray-500 font-medium">Your wishlist is empty.</p>
+                        </div>
+                    </template>
+
+                    <template x-for="item in wishlist" :key="item.id">
+                        <div class="flex items-center space-x-4 p-3 bg-brand-50/50 rounded-2xl border border-brand-100">
+                            <img :src="item.image" :alt="item.name" class="w-16 h-20 object-cover rounded-xl">
+                            <div class="flex-1">
+                                <h4 x-text="item.name" class="font-serif font-semibold text-sm text-gray-900"></h4>
+                                <p class="text-xs font-bold text-brand-600 mt-1">LKR <span x-text="item.price.toLocaleString()"></span></p>
+                                <button @click="addToCart(item, 'M'); removeFromWishlist(item.id)" 
+                                        class="mt-2 text-xs bg-brand-500 text-white px-3 py-1 rounded-md font-medium hover:bg-brand-600 transition">
+                                    Move To Cart
+                                </button>
+                            </div>
+                            <button @click="removeFromWishlist(item.id)" class="text-gray-400 hover:text-red-500 p-2">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Checkout Modal (Standard Demo System) -->
+    <div x-show="checkoutModalOpen" x-cloak 
+         class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 sm:p-6"
+         x-transition>
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm" @click="checkoutModalOpen = false"></div>
+
+        <div class="relative bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl z-10 p-6 sm:p-8 max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <!-- Header -->
+            <div class="flex justify-between items-center pb-4 border-b border-gray-100">
+                <div>
+                    <h3 class="font-serif text-2xl font-bold text-velvet">Checkout</h3>
+                    <p class="text-xs text-gray-500">Complete your order details below</p>
+                </div>
+                <button @click="checkoutModalOpen = false" class="text-gray-400 hover:text-gray-600">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Form Body -->
+            <form @submit.prevent="placeOrder()" class="mt-6 space-y-6">
+                <!-- Customer Info -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-brand-600 mb-3">1. Shipping Information</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Full Name *</label>
+                            <input type="text" required x-model="checkoutForm.name" class="w-full px-3 py-2 text-xs rounded-xl border border-gray-300 focus:ring-1 focus:ring-brand-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Phone Number *</label>
+                            <input type="text" required x-model="checkoutForm.phone" class="w-full px-3 py-2 text-xs rounded-xl border border-gray-300 focus:ring-1 focus:ring-brand-500 focus:outline-none">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Delivery Address *</label>
+                            <input type="text" required x-model="checkoutForm.address" placeholder="House No, Street, City" class="w-full px-3 py-2 text-xs rounded-xl border border-gray-300 focus:ring-1 focus:ring-brand-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-700 mb-1">City / District *</label>
+                            <input type="text" required x-model="checkoutForm.city" class="w-full px-3 py-2 text-xs rounded-xl border border-gray-300 focus:ring-1 focus:ring-brand-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Email Address</label>
+                            <input type="email" x-model="checkoutForm.email" class="w-full px-3 py-2 text-xs rounded-xl border border-gray-300 focus:ring-1 focus:ring-brand-500 focus:outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Method Selection -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-brand-600 mb-3">2. Payment Method</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <label class="p-3 border rounded-2xl flex flex-col items-center justify-center cursor-pointer transition"
+                               :class="paymentMethod === 'card' ? 'border-brand-500 bg-brand-50/50 text-brand-900 font-semibold' : 'border-gray-200'">
+                            <input type="radio" name="payment" value="card" x-model="paymentMethod" class="sr-only">
+                            <i class="fa-solid fa-credit-card text-lg mb-1 text-brand-500"></i>
+                            <span class="text-xs">Credit/Debit Card</span>
+                        </label>
+
+                        <label class="p-3 border rounded-2xl flex flex-col items-center justify-center cursor-pointer transition"
+                               :class="paymentMethod === 'cod' ? 'border-brand-500 bg-brand-50/50 text-brand-900 font-semibold' : 'border-gray-200'">
+                            <input type="radio" name="payment" value="cod" x-model="paymentMethod" class="sr-only">
+                            <i class="fa-solid fa-money-bill-wave text-lg mb-1 text-green-600"></i>
+                            <span class="text-xs">Cash on Delivery</span>
+                        </label>
+
+                        <label class="p-3 border rounded-2xl flex flex-col items-center justify-center cursor-pointer transition"
+                               :class="paymentMethod === 'bank' ? 'border-brand-500 bg-brand-50/50 text-brand-900 font-semibold' : 'border-gray-200'">
+                            <input type="radio" name="payment" value="bank" x-model="paymentMethod" class="sr-only">
+                            <i class="fa-solid fa-building-columns text-lg mb-1 text-blue-600"></i>
+                            <span class="text-xs">Bank Transfer</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Card Form Placeholder (if card selected) -->
+                <div x-show="paymentMethod === 'card'" class="p-4 bg-gray-50 rounded-2xl border border-gray-200 space-y-3">
+                    <p class="text-xs font-semibold text-gray-700">Card Payment Gateway (Demo)</p>
+                    <input type="text" placeholder="Card Number (4000 1234 5678 9010)" class="w-full px-3 py-2 text-xs rounded-xl border border-gray-300">
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="text" placeholder="MM/YY" class="w-full px-3 py-2 text-xs rounded-xl border border-gray-300">
+                        <input type="text" placeholder="CVC" class="w-full px-3 py-2 text-xs rounded-xl border border-gray-300">
+                    </div>
+                </div>
+
+                <!-- Order Total Summary -->
+                <div class="bg-brand-50 p-4 rounded-2xl flex justify-between items-center">
+                    <div>
+                        <span class="text-xs text-gray-500 block">Total Amount Due</span>
+                        <span class="font-serif text-xl font-bold text-velvet">LKR <span x-text="grandTotal.toLocaleString()"></span></span>
+                    </div>
+                    <button type="submit" 
+                            class="bg-velvet hover:bg-brand-900 text-gold px-8 py-3 rounded-xl font-bold text-sm shadow-md transition">
+                        Confirm & Place Order
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Success Confirmation Modal -->
+    <div x-show="orderSuccessModalOpen" x-cloak 
+         class="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4"
+         x-transition>
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-sm"></div>
+
+        <div class="relative bg-white rounded-3xl max-w-md w-full p-8 text-center shadow-2xl z-10">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto text-green-600 text-2xl mb-4">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-velvet">Order Confirmed!</h3>
+            <p class="text-xs text-gray-500 mt-2">Thank you for shopping with Aura Velvet Ceylon. Your order reference is <span class="font-bold text-brand-600" x-text="lastOrderId"></span>.</p>
+            
+            <div class="mt-6 p-4 bg-brand-50 rounded-2xl text-left text-xs space-y-1 text-gray-700">
+                <p><strong>Deliver To:</strong> <span x-text="checkoutForm.name"></span></p>
+                <p><strong>Phone:</strong> <span x-text="checkoutForm.phone"></span></p>
+                <p><strong>Address:</strong> <span x-text="checkoutForm.address"></span>, <span x-text="checkoutForm.city"></span></p>
+                <p><strong>Payment Mode:</strong> <span class="uppercase font-semibold" x-text="paymentMethod"></span></p>
+            </div>
+
+            <button @click="orderSuccessModalOpen = false" class="mt-6 w-full bg-brand-500 hover:bg-brand-600 text-white py-3 rounded-xl font-semibold text-sm transition">
+                Continue Shopping
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Toast Notification System -->
+    <div class="fixed bottom-5 right-5 z-50 space-y-2 pointer-events-none">
+        <template x-for="toast in toasts" :key="toast.id">
+            <div x-transition:enter="transition ease-out duration-300 transform translate-y-2 opacity-0"
+                 x-transition:enter-end="transform translate-y-0 opacity-100"
+                 x-transition:leave="transition ease-in duration-200 transform translate-y-2 opacity-0"
+                 class="pointer-events-auto bg-velvet text-white px-5 py-3 rounded-2xl shadow-xl flex items-center space-x-3 text-xs border border-gold/30">
+                <i class="fa-solid fa-circle-check text-gold"></i>
+                <span x-text="toast.message"></span>
+            </div>
+        </template>
+    </div>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+        function appData() {
+            return {
+                // UI States
+                mobileMenuOpen: false,
+                searchOpen: false,
+                cartDrawerOpen: false,
+                wishlistDrawerOpen: false,
+                quickViewModalOpen: false,
+                checkoutModalOpen: false,
+                orderSuccessModalOpen: false,
+
+                // Filter & Search
+                selectedCategory: 'All',
+                searchQuery: '',
+
+                // Quick View Data
+                quickViewProduct: null,
+                selectedSize: 'M',
+
+                // Hero Slider Data
+                currentSlide: 0,
+                slides: [
+                    {
+                        title: "Royal Velvet & Ceylon Silks",
+                        subtitle: "New Festive Collection 2026",
+                        description: "Indulge in handcrafted luxury silhouettes customized for elegant occasions and timeless sophistication.",
+                        image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=80"
+                    },
+                    {
+                        title: "Graceful Handloom Sarees",
+                        subtitle: "Traditional Heritage",
+                        description: "Authentic woven silk and breathable linen sarees designed with modern metallic drapes.",
+                        image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1200&q=80"
+                    },
+                    {
+                        title: "Modern Resort Elegance",
+                        subtitle: "Contemporary Luxe",
+                        description: "Effortless flowy dresses and artisan boutique handbags for stylish tropical luxury.",
+                        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80"
+                    }
+                ],
+
+                // Categories
+                categories: ['All', 'Dresses', 'Tops', 'Sarees', 'Bags'],
+
+                // Products Database
+                products: [
+                    {
+                        id: 1,
+                        name: "Aura Emerald Velvet Gown",
+                        category: "Dresses",
+                        price: 18500,
+                        discount: 15,
+                        isNew: true,
+                        image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=600&q=80",
+                        description: "Exquisite royal emerald velvet floor-length evening dress with detailed crystal wrist cuffs."
+                    },
+                    {
+                        id: 2,
+                        name: "Ceylon Golden Silk Saree",
+                        category: "Sarees",
+                        price: 24000,
+                        discount: 0,
+                        isNew: true,
+                        image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=600&q=80",
+                        description: "Pure woven raw silk saree featuring golden zardosi embroidery borders."
+                    },
+                    {
+                        id: 3,
+                        name: "Blush Chiffon Wrap Top",
+                        category: "Tops",
+                        price: 6800,
+                        discount: 10,
+                        isNew: false,
+                        image: "https://images.unsplash.com/photo-1534126511673-b6899657816a?auto=format&fit=crop&w=600&q=80",
+                        description: "Breathable powder blush chiffon top with ruffled lantern sleeves."
+                    },
+                    {
+                        id: 4,
+                        name: "Velvet Monogram Clutch Bag",
+                        category: "Bags",
+                        price: 9200,
+                        discount: 0,
+                        isNew: false,
+                        image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80",
+                        description: "Handmade velvet hard-shell clutch with detachable antique gold chain strap."
+                    },
+                    {
+                        id: 5,
+                        name: "Midnight Silk Linen Dress",
+                        category: "Dresses",
+                        price: 14500,
+                        discount: 0,
+                        isNew: false,
+                        image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&q=80",
+                        description: "Elegant dark navy midi dress with a fitted waist and flared silk linen skirt."
+                    },
+                    {
+                        id: 6,
+                        name: "Lotus Handloom Tussar Saree",
+                        category: "Sarees",
+                        price: 21500,
+                        discount: 20,
+                        isNew: false,
+                        image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80",
+                        description: "Lightweight lotus-pink handcrafted saree with woven botanical motifs."
+                    },
+                    {
+                        id: 7,
+                        name: "Satin Ivory Button-Down Top",
+                        category: "Tops",
+                        price: 7400,
+                        discount: 0,
+                        isNew: true,
+                        image: "https://images.unsplash.com/photo-1604014237800-1c9102c219da?auto=format&fit=crop&w=600&q=80",
+                        description: "Luxurious ivory satin blouse with custom mother-of-pearl buttons."
+                    },
+                    {
+                        id: 8,
+                        name: "Artisan Leather Tote Bag",
+                        category: "Bags",
+                        price: 12800,
+                        discount: 5,
+                        isNew: false,
+                        image: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=600&q=80",
+                        description: "Structured genuine leather everyday tote featuring soft velvet inner lining."
+                    }
+                ],
+
+                // Cart & Wishlist State
+                cart: [],
+                wishlist: [],
+
+                // Checkout Form
+                promoInput: '',
+                discount: 0,
+                deliveryFee: 350,
+                paymentMethod: 'card',
+                checkoutForm: {
+                    name: 'Keshini Perera',
+                    phone: '07xxxxxxxx',
+                    address: 'No. 15, Flower Road',
+                    city: 'Colombo 07',
+                    email: 'keshini@example.lk'
+                },
+                lastOrderId: '',
+
+                // Toast Notification Array
+                toasts: [],
+
+                // App Initialization
+                initApp() {
+                    // Auto slide hero banner
+                    setInterval(() => {
+                        this.nextSlide();
+                    }, 5000);
+                },
+
+                // Hero Controls
+                nextSlide() {
+                    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+                },
+                prevSlide() {
+                    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+                },
+
+                // Filtered Products Computed Logic
+                get filteredProducts() {
+                    return this.products.filter(p => {
+                        const matchesCategory = this.selectedCategory === 'All' || p.category === this.selectedCategory;
+                        const matchesSearch = p.name.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+                                              p.description.toLowerCase().includes(this.searchQuery.toLowerCase());
+                        return matchesCategory && matchesSearch;
+                    });
+                },
+
+                // Cart Calculations
+                get cartCount() {
+                    return this.cart.reduce((sum, item) => sum + item.quantity, 0);
+                },
+                get subtotal() {
+                    return this.cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                },
+                get discountAmount() {
+                    return (this.subtotal * this.discount) / 100;
+                },
+                get grandTotal() {
+                    if (this.cart.length === 0) return 0;
+                    return Math.max(0, this.subtotal - this.discountAmount + this.deliveryFee);
+                },
+
+                // Cart Actions
+                addToCart(product, size = 'M') {
+                    const existingIndex = this.cart.findIndex(i => i.id === product.id && i.size === size);
+                    if (existingIndex > -1) {
+                        this.cart[existingIndex].quantity++;
+                    } else {
+                        this.cart.push({
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            image: product.image,
+                            size: size,
+                            quantity: 1
+                        });
+                    }
+                    this.showToast(`Added "${product.name}" (${size}) to your bag`);
+                },
+                updateQuantity(index, delta) {
+                    this.cart[index].quantity += delta;
+                    if (this.cart[index].quantity <= 0) {
+                        this.cart.splice(index, 1);
+                    }
+                },
+                removeFromCart(index) {
+                    const removed = this.cart.splice(index, 1);
+                    if (removed.length) {
+                        this.showToast(`Removed "${removed[0].name}" from bag`);
+                    }
+                },
+
+                // Quick Buy Action
+                quickBuy(product, size = 'M') {
+                    this.addToCart(product, size);
+                    this.quickViewModalOpen = false;
+                    this.checkoutModalOpen = true;
+                },
+
+                // Wishlist Actions
+                toggleWishlist(product) {
+                    const index = this.wishlist.findIndex(i => i.id === product.id);
+                    if (index > -1) {
+                        this.wishlist.splice(index, 1);
+                        this.showToast(`Removed from Wishlist`);
+                    } else {
+                        this.wishlist.push(product);
+                        this.showToast(`Added to Wishlist!`);
+                    }
+                },
+                isInWishlist(productId) {
+                    return this.wishlist.some(i => i.id === productId);
+                },
+                removeFromWishlist(id) {
+                    this.wishlist = this.wishlist.filter(i => i.id !== id);
+                },
+
+                // Quick View Opener
+                openQuickView(product) {
+                    this.quickViewProduct = product;
+                    this.selectedSize = 'M';
+                    this.quickViewModalOpen = true;
+                },
+
+                // Promo Code Handler
+                applyPromo() {
+                    if (this.promoInput.trim().toUpperCase() === 'AURA10') {
+                        this.discount = 10;
+                        this.showToast('10% Promo Discount Applied!');
+                    } else {
+                        this.showToast('Invalid Promo Code');
+                    }
+                },
+
+                // Place Order Action
+                placeOrder() {
+                    if (this.cart.length === 0) {
+                        this.showToast("Your shopping cart is empty!");
+                        return;
+                    }
+                    this.lastOrderId = 'AV-' + Math.floor(100000 + Math.random() * 900000);
+                    this.checkoutModalOpen = false;
+                    this.orderSuccessModalOpen = true;
+                    this.cart = []; // Reset Cart
+                    this.showToast('Order placed successfully!');
+                },
+
+                // Toast Notification Trigger
+                showToast(message) {
+                    const id = Date.now();
+                    this.toasts.push({ id, message });
+                    setTimeout(() => {
+                        this.toasts = this.toasts.filter(t => t.id !== id);
+                    }, 3000);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
